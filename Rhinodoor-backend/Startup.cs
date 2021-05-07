@@ -11,6 +11,7 @@ using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using Microsoft.Extensions.Logging;
 using Microsoft.OpenApi.Models;
+using Rhinodoor_backend.AppExtensions;
 
 namespace Rhinodoor_backend
 {
@@ -27,10 +28,13 @@ namespace Rhinodoor_backend
         public void ConfigureServices(IServiceCollection services)
         {
             services.AddControllers();
+            
             services.AddSwaggerGen(c =>
             {
                 c.SwaggerDoc("v1", new OpenApiInfo {Title = "Rhinodoor_backend", Version = "v1"});
             });
+            
+            DependancyInjection.Inject(ref services);
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.

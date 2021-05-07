@@ -25,7 +25,7 @@ namespace Rhinodoor_backend.Controllers
         {
             var response = new List<ViewModels.Doors.GetAll.ResponseViewModel>
             {
-                
+                 
             };
             
             return new JsonResult(response);
