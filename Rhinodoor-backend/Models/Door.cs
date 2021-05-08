@@ -2,7 +2,7 @@ using System;
 
 namespace Rhinodoor_backend.Models
 {
-    public class Order
+    public class Door
     {
         public int Id { get; set; }
 
@@ -14,6 +14,10 @@ namespace Rhinodoor_backend.Models
 
         public int? ModifiedBy { get; set; }
 
-        public int DoorId { get; set; }
+        public string DoorName { get; set; }
+
+        public string DoorImage { get; set; }
+
+        public int DoorOptionId { get; set; }
     }
 }

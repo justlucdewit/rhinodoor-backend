@@ -2,7 +2,7 @@ using System;
 
 namespace Rhinodoor_backend.Models
 {
-    public class Order
+    public class User
     {
         public int Id { get; set; }
 
@@ -14,6 +14,16 @@ namespace Rhinodoor_backend.Models
 
         public int? ModifiedBy { get; set; }
 
-        public int DoorId { get; set; }
+        public string Name { get; set; }
+
+        public string Address { get; set; }
+
+        public string City { get; set; }
+
+        public string PostalCode { get; set; }
+
+        public string PhoneNumber { get; set; }
+
+        public string Email { get; set; }
     }
 }

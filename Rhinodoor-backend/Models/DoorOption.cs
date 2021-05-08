@@ -2,7 +2,7 @@ using System;
 
 namespace Rhinodoor_backend.Models
 {
-    public class Order
+    public class DoorOption
     {
         public int Id { get; set; }
 
@@ -14,6 +14,14 @@ namespace Rhinodoor_backend.Models
 
         public int? ModifiedBy { get; set; }
 
-        public int DoorId { get; set; }
+        public int Width { get; set; }
+
+        public int Height { get; set; }
+
+        public float Price { get; set; }
+
+        public int ColorHex { get; set; }
+
+        public int ColorRAL { get; set; }
     }
 }
