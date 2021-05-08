@@ -1,4 +1,6 @@
 using System;
+using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations.Schema;
 
 namespace Rhinodoor_backend.Models
 {
@@ -23,5 +25,11 @@ namespace Rhinodoor_backend.Models
         public int ColorHex { get; set; }
 
         public int ColorRAL { get; set; }
+        
+        public User CreatedByUser { get; set; }
+        
+        public User ModifiedByUser { get; set; }
+
+        public List<Order> Orders { get; set; }
     }
 }
