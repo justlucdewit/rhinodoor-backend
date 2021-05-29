@@ -1,19 +1,13 @@
 using System;
+using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
 
 namespace Rhinodoor_backend.Models
 {
     public class User
     {
+        [Key]
         public int Id { get; set; }
-
-        public DateTime CreatedAt { get; set; }
-
-        public DateTime? ModifiedAt { get; set; }
-
-        public int CreatedBy { get; set; }
-
-        public int? ModifiedBy { get; set; }
 
         public string Name { get; set; }
 
@@ -32,10 +26,6 @@ namespace Rhinodoor_backend.Models
         public string UserName { get; set; }
 
         public string PasswordHash { get; set; }
-        
-        public User CreatedByUser { get; set; }
-        
-        public User ModifiedByUser { get; set; }
 
         public Order Order { get; set; }
     }

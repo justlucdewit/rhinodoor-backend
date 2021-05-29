@@ -1,9 +1,9 @@
-namespace Rhinodoor_backend.ViewModels.Doors.GetAll
+namespace Rhinodoor_backend.Services.Dtos
 {
-    public class ResponseViewModel
+    public class DoorDto
     {
         public string DoorName { get; set; }
-        
+
         public string DoorImage { get; set; }
     }
 }
