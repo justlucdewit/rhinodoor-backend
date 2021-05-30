@@ -13,7 +13,8 @@ namespace Rhinodoor_backend.AppExtensions
         public DbSet<DoorOption> DoorOptions { get; set; }
         public DbSet<Order> Orders { get; set; }
         public DbSet<User> Users { get; set; }
-        
+        public DbSet<DoorColor> DoorColors { get; set; }
+
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
             // Doors
@@ -21,8 +22,7 @@ namespace Rhinodoor_backend.AppExtensions
 
             // DoorOptions
             modelBuilder.Entity<DoorOption>().ToTable("DoorOptions");
-            modelBuilder.Entity<DoorOption>().HasOne(x => x.Door).WithMany(x => x.DoorOptions)
-                .HasForeignKey(x => x.DoorId);
+            modelBuilder.Entity<DoorOption>().HasOne(x => x.Door).WithMany(x => x.DoorOptions).HasForeignKey(x => x.DoorId);
 
             // Orders
             modelBuilder.Entity<Order>().ToTable("Orders");
@@ -32,6 +32,10 @@ namespace Rhinodoor_backend.AppExtensions
 
             // Users
             modelBuilder.Entity<User>().ToTable("Users");
+            
+            // DoorColors
+            modelBuilder.Entity<DoorColor>().ToTable("DoorColors");
+            modelBuilder.Entity<DoorColor>().HasOne(x => x.Door).WithMany(x => x.DoorColors).HasForeignKey(x => x.DoorId);
         }
     }
 }

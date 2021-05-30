@@ -17,5 +17,7 @@ namespace Rhinodoor_backend.Models
         public List<DoorOption> DoorOptions { get; set; }
         
         public List<Order> Orders { get; set; }
+
+        public List<DoorColor> DoorColors { get; set; }
     }
 }

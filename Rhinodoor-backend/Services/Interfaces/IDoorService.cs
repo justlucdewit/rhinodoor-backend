@@ -9,5 +9,7 @@ namespace Rhinodoor_backend.Services.Interfaces
         Task<List<DoorDto>> GetAll();
 
         Task PlaceOrder(OrderDto order);
+
+        Task CreateNewDoor(DoorItemDto doorItem);
     }
 }

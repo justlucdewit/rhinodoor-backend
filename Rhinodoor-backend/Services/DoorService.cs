@@ -80,5 +80,16 @@ namespace Rhinodoor_backend.Services
                 DoorOptionId = order.DoorOptionId
             });
         }
+
+        public async Task CreateNewDoor(DoorItemDto doorItem)
+        {
+            var dbDoor = await _doorRepository.CreateNewDoor(new Repositories.Dto.Door.DoorDto
+            {
+                DoorImage = doorItem.DoorImage,
+                DoorName = doorItem.DoorName
+            });
+            
+            
+        }
     }
 }

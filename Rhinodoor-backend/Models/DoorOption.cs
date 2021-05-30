@@ -18,10 +18,6 @@ namespace Rhinodoor_backend.Models
 
         public float Price { get; set; }
 
-        public int ColorHex { get; set; }
-
-        public int ColorRAL { get; set; }
-
         public List<Order> Orders { get; set; }
 
         public Door Door { get; set; }

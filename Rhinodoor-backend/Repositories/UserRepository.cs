@@ -8,11 +8,20 @@ namespace Rhinodoor_backend.Repositories.Interfaces
     {
         private readonly DatabaseContextAbstract _dbContext;
         
+        /// <summary>
+        /// Constructor
+        /// </summary>
+        /// <param name="dbContext"></param>
         public UserRepository(DatabaseContextAbstract dbContext)
         {
             _dbContext = dbContext;
         }
         
+        /// <summary>
+        /// Create a new client
+        /// </summary>
+        /// <param name="user"></param>
+        /// <returns></returns>
         public async Task<User> CreateClient(User user)
         {
             var dbUser = await _dbContext.Users.AddAsync(user);

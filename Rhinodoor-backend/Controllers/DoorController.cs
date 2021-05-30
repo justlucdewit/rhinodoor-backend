@@ -17,6 +17,7 @@ namespace Rhinodoor_backend.Controllers
         /// <summary>
         /// Constructor
         /// </summary>
+        /// <param name="doorService"></param>
         public DoorController(IDoorService doorService)
         {
             _doorService = doorService;
@@ -43,7 +44,7 @@ namespace Rhinodoor_backend.Controllers
 
         [HttpPost("order")]
         [ProducesResponseType(200)]
-        public async Task<ActionResult> OrderDoor(ViewModels.Doors.OrderDoor.RequestViewModel request)
+        public async Task<ActionResult> OrderDoor([FromBody] ViewModels.Doors.OrderDoor.RequestViewModel request)
         {
             await _doorService.PlaceOrder(new OrderDto
             {
