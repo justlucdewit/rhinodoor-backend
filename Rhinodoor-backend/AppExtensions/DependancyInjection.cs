@@ -17,6 +17,8 @@ namespace Rhinodoor_backend.AppExtensions
         {
             services.AddScoped<IDoorService, DoorService>();
             services.AddScoped<IDoorRepository, DoorRepository>();
+            services.AddScoped<IOrderRepository, OrderRepository>();
+            services.AddScoped<IUserRepository, UserRepository>();
         }
     }
 }
