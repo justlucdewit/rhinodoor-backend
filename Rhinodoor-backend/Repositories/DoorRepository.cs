@@ -53,6 +53,8 @@ namespace Rhinodoor_backend.Repositories
                 DoorName = door.DoorName,
             });
             
+            await _dbContext.SaveChangesAsync();
+            
             // Return it
             return dbDoor.Entity;
         }
@@ -73,9 +75,12 @@ namespace Rhinodoor_backend.Repositories
                 Width = option.Width,
                 Price = option.Price
             });
-            
+
             // Create the new door options
             await _dbContext.DoorOptions.AddRangeAsync(DoorSizes);
+            
+            // Save the db
+            await _dbContext.SaveChangesAsync();
         }
     }
 }

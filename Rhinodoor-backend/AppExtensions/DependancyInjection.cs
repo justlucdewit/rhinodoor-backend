@@ -15,10 +15,18 @@ namespace Rhinodoor_backend.AppExtensions
 
         public static void Inject(ref IServiceCollection services)
         {
+            // Door
             services.AddScoped<IDoorService, DoorService>();
             services.AddScoped<IDoorRepository, DoorRepository>();
+            
+            // Order
             services.AddScoped<IOrderRepository, OrderRepository>();
+            
+            // User
             services.AddScoped<IUserRepository, UserRepository>();
+            
+            // Color
+            services.AddScoped<IColorRepository, ColorRepository>();
         }
     }
 }

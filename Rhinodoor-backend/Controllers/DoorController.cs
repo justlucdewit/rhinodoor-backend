@@ -41,8 +41,14 @@ namespace Rhinodoor_backend.Controllers
             
             return new JsonResult(response);
         }
-
+        
+        /// <summary>
+        /// Order door
+        /// </summary>
+        /// <param name="request"></param>
+        /// <returns></returns>
         [HttpPost("order")]
+        [Consumes("application/json")]
         [ProducesResponseType(200)]
         public async Task<ActionResult> OrderDoor([FromBody] ViewModels.Doors.OrderDoor.RequestViewModel request)
         {

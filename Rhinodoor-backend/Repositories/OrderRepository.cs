@@ -26,6 +26,8 @@ namespace Rhinodoor_backend.Repositories
         public async Task<Order> PlaceOrder(Order order)
         {
             var dbOrder = await _dbContext.Orders.AddAsync(order);
+            
+            await _dbContext.SaveChangesAsync();
 
             return dbOrder.Entity;
         }

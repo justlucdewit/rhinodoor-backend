@@ -4,9 +4,11 @@ using Microsoft.EntityFrameworkCore;
 using System.Linq;
 using System.Threading.Tasks;
 using Rhinodoor_backend.Models;
+using Rhinodoor_backend.Repositories.Dto.Door;
 using Rhinodoor_backend.Repositories.Interfaces;
 using Rhinodoor_backend.Services.Dtos;
 using Rhinodoor_backend.Services.Interfaces;
+using DoorDto = Rhinodoor_backend.Services.Dtos.DoorDto;
 
 namespace Rhinodoor_backend.Services
 {
@@ -15,6 +17,7 @@ namespace Rhinodoor_backend.Services
         private readonly IDoorRepository _doorRepository;
         private readonly IUserRepository _userRepository;
         private readonly IOrderRepository _orderRepository;
+        private readonly IColorRepository _colorRepository;
         
         /// <summary>
         /// Constructor
@@ -25,11 +28,13 @@ namespace Rhinodoor_backend.Services
         public DoorService(
             IDoorRepository doorRepository,
             IUserRepository userRepository,
-            IOrderRepository orderRepository)
+            IOrderRepository orderRepository,
+            IColorRepository colorRepository)
         {
             _doorRepository = doorRepository;
             _userRepository = userRepository;
             _orderRepository = orderRepository;
+            _colorRepository = colorRepository;
         }
         
         /// <summary>
@@ -81,6 +86,11 @@ namespace Rhinodoor_backend.Services
             });
         }
 
+        /// <summary>
+        /// Put a new door into the database
+        /// </summary>
+        /// <param name="doorItem"></param>
+        /// <returns></returns>
         public async Task CreateNewDoor(DoorItemDto doorItem)
         {
             var dbDoor = await _doorRepository.CreateNewDoor(new Repositories.Dto.Door.DoorDto
@@ -88,8 +98,22 @@ namespace Rhinodoor_backend.Services
                 DoorImage = doorItem.DoorImage,
                 DoorName = doorItem.DoorName
             });
-            
-            
+
+            await _doorRepository.CreateDoorOptions(dbDoor.Id, doorItem.DoorSizes.Select(doorSize => new DoorOptionDto
+            {
+                Height = doorSize.Height,
+                Price = doorSize.Price,
+                Width = doorSize.Width
+            }).ToList());
+
+            var colors = doorItem.ColorsHEX.Select((hex, index) => new ColorDto
+            {
+                ColorHEX = hex,
+                ColorRAL = doorItem.ColorsRAL[index],
+                DoorId = dbDoor.Id
+            }).ToList();
+
+            await _colorRepository.AddColorsAsync(colors);
         }
     }
 }

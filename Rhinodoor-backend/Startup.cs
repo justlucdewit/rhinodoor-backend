@@ -28,6 +28,7 @@ namespace Rhinodoor_backend
             services.AddSwaggerGen(c =>
             {
                 c.SwaggerDoc("v1", new OpenApiInfo {Title = "Rhinodoor_backend", Version = "v1"});
+                c.CustomSchemaIds(type => type.ToString());
             });
 
             DependancyInjection.Inject(ref services);

@@ -25,6 +25,8 @@ namespace Rhinodoor_backend.Repositories.Interfaces
         public async Task<User> CreateClient(User user)
         {
             var dbUser = await _dbContext.Users.AddAsync(user);
+            
+            await _dbContext.SaveChangesAsync();
 
             return dbUser.Entity;
         }
