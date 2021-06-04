@@ -77,12 +77,13 @@ namespace Rhinodoor_backend.Services
             });
 
             // Register the order
-            _orderRepository.PlaceOrder(new Order
+            await _orderRepository.PlaceOrder(new Order
             {
                 PlacedOn = DateTime.UtcNow,
                 PlacedByUser = dbUser,
                 DoorId = order.DoorId,
-                DoorOptionId = order.DoorOptionId
+                //DoorOptionId = order.DoorOptionId,
+                DoorColorId = order.DoorColorId
             });
         }
 

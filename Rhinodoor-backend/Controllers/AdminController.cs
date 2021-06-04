@@ -25,7 +25,7 @@ namespace Rhinodoor_backend.Controllers
         /// </summary>
         /// <param name="request"></param>
         /// <returns></returns>
-        [HttpPost("/admin/new-door")]
+        [HttpPost("/new-door")]
         [ProducesResponseType(200)]
         public async Task<ActionResult> NewDoor([FromRoute] string username, [FromRoute] string password, [FromBody] ViewModels.Admin.NewDoor.RequestViewModel request)
         {
@@ -43,6 +43,12 @@ namespace Rhinodoor_backend.Controllers
                 }).ToList()
             });
             
+            return Ok();
+        }
+        
+        [HttpPost("/new-admin")]
+        public async Task<ActionResult> NewAdmin()
+        {
             return Ok();
         }
     }

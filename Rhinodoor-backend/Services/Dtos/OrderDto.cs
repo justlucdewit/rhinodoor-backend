@@ -24,6 +24,8 @@ namespace Rhinodoor_backend.Services.Dtos
 
         public int DoorOptionId { get; set; }
 
+        public int DoorColorId { get; set; }
+
         #endregion
     }
 }

@@ -1,3 +1,5 @@
+using System.Collections.Generic;
+
 namespace Rhinodoor_backend.Models
 {
     public class DoorColor
@@ -10,6 +12,8 @@ namespace Rhinodoor_backend.Models
 
         public int ColorHEX { get; set; }
 
-        public virtual Door Door { get; set; }
+        public Door Door { get; set; }
+
+        public List<Order> Orders { get; set; }
     }
 }

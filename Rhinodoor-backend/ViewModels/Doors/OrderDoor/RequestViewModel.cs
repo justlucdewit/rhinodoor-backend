@@ -24,6 +24,8 @@ namespace Rhinodoor_backend.ViewModels.Doors.OrderDoor
 
         public int DoorOptionId { get; set; }
 
+        public int DoorColorId { get; set; }
+
         #endregion
     }
 }

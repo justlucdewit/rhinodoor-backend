@@ -61,7 +61,8 @@ namespace Rhinodoor_backend.Controllers
                 ClientPhoneNumber = request.ClientPhoneNumber,
                 ClientPostalCode = request.ClientPostalCode,
                 DoorId = request.DoorId,
-                DoorOptionId = request.DoorOptionId
+                DoorOptionId = request.DoorOptionId,
+                DoorColorId = request.DoorColorId
             });
             
             return Ok();

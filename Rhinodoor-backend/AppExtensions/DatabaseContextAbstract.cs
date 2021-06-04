@@ -28,7 +28,8 @@ namespace Rhinodoor_backend.AppExtensions
             modelBuilder.Entity<Order>().ToTable("Orders");
             modelBuilder.Entity<Order>().HasOne(x => x.Door).WithMany(x => x.Orders).HasForeignKey(x => x.DoorId);
             modelBuilder.Entity<Order>().HasOne(x => x.PlacedByUser).WithOne(x => x.Order).HasForeignKey<Order>(x => x.PlacedBy);
-            modelBuilder.Entity<Order>().HasOne(x => x.DoorOption).WithMany(x => x.Orders).HasForeignKey(x => x.DoorOptionId);
+            //modelBuilder.Entity<Order>().HasOne(x => x.DoorOption).WithMany(x => x.Orders).HasForeignKey(x => x.DoorOptionId);
+            modelBuilder.Entity<Order>().HasOne(x => x.DoorColor).WithMany(x => x.Orders).HasForeignKey(x => x.DoorColorId).OnDelete(DeleteBehavior.NoAction);
 
             // Users
             modelBuilder.Entity<User>().ToTable("Users");

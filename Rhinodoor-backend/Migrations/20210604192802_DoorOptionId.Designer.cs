@@ -3,15 +3,17 @@ using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using Rhinodoor_backend.AppExtensions;
 
 namespace Rhinodoor_backend.Migrations
 {
     [DbContext(typeof(DatabaseContextAbstract))]
-    partial class DatabaseContextAbstractModelSnapshot : ModelSnapshot
+    [Migration("20210604192802_DoorOptionId")]
+    partial class DoorOptionId
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -99,7 +101,7 @@ namespace Rhinodoor_backend.Migrations
                     b.Property<int>("DoorId")
                         .HasColumnType("int");
 
-                    b.Property<int?>("DoorOptionId")
+                    b.Property<int>("DoorOptionId")
                         .HasColumnType("int");
 
                     b.Property<int>("PlacedBy")
@@ -199,7 +201,9 @@ namespace Rhinodoor_backend.Migrations
 
                     b.HasOne("Rhinodoor_backend.Models.DoorOption", "DoorOption")
                         .WithMany("Orders")
-                        .HasForeignKey("DoorOptionId");
+                        .HasForeignKey("DoorOptionId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
 
                     b.HasOne("Rhinodoor_backend.Models.User", "PlacedByUser")
                         .WithOne("Order")
