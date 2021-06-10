@@ -11,5 +11,7 @@ namespace Rhinodoor_backend.Services.Interfaces
         Task PlaceOrder(OrderDto order);
 
         Task CreateNewDoor(DoorItemDto doorItem);
+
+        Task CreateNewUser(Rhinodoor_backend.Services.Dtos.LoginDto loginItem);
     }
 }

@@ -1,6 +1,7 @@
 using System.Threading.Tasks;
 using Rhinodoor_backend.AppExtensions;
 using Rhinodoor_backend.Models;
+using Rhinodoor_backend.Repositories.Dto.Door;
 
 namespace Rhinodoor_backend.Repositories.Interfaces
 {
@@ -29,6 +30,11 @@ namespace Rhinodoor_backend.Repositories.Interfaces
             await _dbContext.SaveChangesAsync();
 
             return dbUser.Entity;
+        }
+
+        public async Task CreateAdmin(LoginDto login)
+        {
+            
         }
     }
 }
