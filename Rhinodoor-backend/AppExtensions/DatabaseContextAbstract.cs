@@ -22,13 +22,13 @@ namespace Rhinodoor_backend.AppExtensions
 
             // DoorOptions
             modelBuilder.Entity<DoorOption>().ToTable("DoorOptions");
-            modelBuilder.Entity<DoorOption>().HasOne(x => x.Door).WithMany(x => x.DoorOptions).HasForeignKey(x => x.DoorId);
+            modelBuilder.Entity<DoorOption>().HasOne(x => x.Door).WithMany(x => x.DoorOptions).HasForeignKey(x => x.DoorId).OnDelete(DeleteBehavior.NoAction);
 
             // Orders
             modelBuilder.Entity<Order>().ToTable("Orders");
-            modelBuilder.Entity<Order>().HasOne(x => x.Door).WithMany(x => x.Orders).HasForeignKey(x => x.DoorId);
-            modelBuilder.Entity<Order>().HasOne(x => x.PlacedByUser).WithOne(x => x.Order).HasForeignKey<Order>(x => x.PlacedBy);
-            //modelBuilder.Entity<Order>().HasOne(x => x.DoorOption).WithMany(x => x.Orders).HasForeignKey(x => x.DoorOptionId);
+            modelBuilder.Entity<Order>().HasOne(x => x.Door).WithMany(x => x.Orders).HasForeignKey(x => x.DoorId).OnDelete(DeleteBehavior.NoAction);
+            modelBuilder.Entity<Order>().HasOne(x => x.PlacedByUser).WithOne(x => x.Order).HasForeignKey<Order>(x => x.PlacedBy).OnDelete(DeleteBehavior.NoAction);
+            modelBuilder.Entity<Order>().HasOne(x => x.DoorOption).WithMany(x => x.Orders).HasForeignKey(x => x.DoorOptionId).OnDelete(DeleteBehavior.NoAction);
             modelBuilder.Entity<Order>().HasOne(x => x.DoorColor).WithMany(x => x.Orders).HasForeignKey(x => x.DoorColorId).OnDelete(DeleteBehavior.NoAction);
 
             // Users
@@ -36,7 +36,7 @@ namespace Rhinodoor_backend.AppExtensions
             
             // DoorColors
             modelBuilder.Entity<DoorColor>().ToTable("DoorColors");
-            modelBuilder.Entity<DoorColor>().HasOne(x => x.Door).WithMany(x => x.DoorColors).HasForeignKey(x => x.DoorId);
+            modelBuilder.Entity<DoorColor>().HasOne(x => x.Door).WithMany(x => x.DoorColors).HasForeignKey(x => x.DoorId).OnDelete(DeleteBehavior.NoAction);
         }
     }
 }

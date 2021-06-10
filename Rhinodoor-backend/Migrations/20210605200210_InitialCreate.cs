@@ -43,6 +43,26 @@ namespace Rhinodoor_backend.Migrations
                 });
 
             migrationBuilder.CreateTable(
+                name: "DoorColors",
+                columns: table => new
+                {
+                    Id = table.Column<int>(type: "int", nullable: false)
+                        .Annotation("SqlServer:Identity", "1, 1"),
+                    DoorId = table.Column<int>(type: "int", nullable: false),
+                    ColorRAL = table.Column<int>(type: "int", nullable: false),
+                    ColorHEX = table.Column<int>(type: "int", nullable: false)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_DoorColors", x => x.Id);
+                    table.ForeignKey(
+                        name: "FK_DoorColors_Doors_DoorId",
+                        column: x => x.DoorId,
+                        principalTable: "Doors",
+                        principalColumn: "Id");
+                });
+
+            migrationBuilder.CreateTable(
                 name: "DoorOptions",
                 columns: table => new
                 {
@@ -51,9 +71,7 @@ namespace Rhinodoor_backend.Migrations
                     DoorId = table.Column<int>(type: "int", nullable: false),
                     Width = table.Column<int>(type: "int", nullable: false),
                     Height = table.Column<int>(type: "int", nullable: false),
-                    Price = table.Column<float>(type: "real", nullable: false),
-                    ColorHex = table.Column<int>(type: "int", nullable: false),
-                    ColorRAL = table.Column<int>(type: "int", nullable: false)
+                    Price = table.Column<float>(type: "real", nullable: false)
                 },
                 constraints: table =>
                 {
@@ -62,8 +80,7 @@ namespace Rhinodoor_backend.Migrations
                         name: "FK_DoorOptions_Doors_DoorId",
                         column: x => x.DoorId,
                         principalTable: "Doors",
-                        principalColumn: "Id",
-                        onDelete: ReferentialAction.Cascade);
+                        principalColumn: "Id");
                 });
 
             migrationBuilder.CreateTable(
@@ -74,24 +91,39 @@ namespace Rhinodoor_backend.Migrations
                         .Annotation("SqlServer:Identity", "1, 1"),
                     PlacedOn = table.Column<DateTime>(type: "datetime2", nullable: false),
                     PlacedBy = table.Column<int>(type: "int", nullable: false),
-                    DoorId = table.Column<int>(type: "int", nullable: false)
+                    DoorId = table.Column<int>(type: "int", nullable: false),
+                    DoorOptionId = table.Column<int>(type: "int", nullable: false),
+                    DoorColorId = table.Column<int>(type: "int", nullable: false)
                 },
                 constraints: table =>
                 {
                     table.PrimaryKey("PK_Orders", x => x.Id);
                     table.ForeignKey(
+                        name: "FK_Orders_DoorColors_DoorColorId",
+                        column: x => x.DoorColorId,
+                        principalTable: "DoorColors",
+                        principalColumn: "Id");
+                    table.ForeignKey(
+                        name: "FK_Orders_DoorOptions_DoorOptionId",
+                        column: x => x.DoorOptionId,
+                        principalTable: "DoorOptions",
+                        principalColumn: "Id");
+                    table.ForeignKey(
                         name: "FK_Orders_Doors_DoorId",
                         column: x => x.DoorId,
                         principalTable: "Doors",
-                        principalColumn: "Id",
-                        onDelete: ReferentialAction.Cascade);
+                        principalColumn: "Id");
                     table.ForeignKey(
                         name: "FK_Orders_Users_PlacedBy",
                         column: x => x.PlacedBy,
                         principalTable: "Users",
-                        principalColumn: "Id",
-                        onDelete: ReferentialAction.Cascade);
+                        principalColumn: "Id");
                 });
+
+            migrationBuilder.CreateIndex(
+                name: "IX_DoorColors_DoorId",
+                table: "DoorColors",
+                column: "DoorId");
 
             migrationBuilder.CreateIndex(
                 name: "IX_DoorOptions_DoorId",
@@ -99,9 +131,19 @@ namespace Rhinodoor_backend.Migrations
                 column: "DoorId");
 
             migrationBuilder.CreateIndex(
+                name: "IX_Orders_DoorColorId",
+                table: "Orders",
+                column: "DoorColorId");
+
+            migrationBuilder.CreateIndex(
                 name: "IX_Orders_DoorId",
                 table: "Orders",
                 column: "DoorId");
+
+            migrationBuilder.CreateIndex(
+                name: "IX_Orders_DoorOptionId",
+                table: "Orders",
+                column: "DoorOptionId");
 
             migrationBuilder.CreateIndex(
                 name: "IX_Orders_PlacedBy",
@@ -113,16 +155,19 @@ namespace Rhinodoor_backend.Migrations
         protected override void Down(MigrationBuilder migrationBuilder)
         {
             migrationBuilder.DropTable(
-                name: "DoorOptions");
-
-            migrationBuilder.DropTable(
                 name: "Orders");
 
             migrationBuilder.DropTable(
-                name: "Doors");
+                name: "DoorColors");
+
+            migrationBuilder.DropTable(
+                name: "DoorOptions");
 
             migrationBuilder.DropTable(
                 name: "Users");
+
+            migrationBuilder.DropTable(
+                name: "Doors");
         }
     }
 }

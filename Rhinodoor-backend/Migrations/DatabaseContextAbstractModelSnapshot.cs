@@ -99,7 +99,7 @@ namespace Rhinodoor_backend.Migrations
                     b.Property<int>("DoorId")
                         .HasColumnType("int");
 
-                    b.Property<int?>("DoorOptionId")
+                    b.Property<int>("DoorOptionId")
                         .HasColumnType("int");
 
                     b.Property<int>("PlacedBy")
@@ -166,7 +166,7 @@ namespace Rhinodoor_backend.Migrations
                     b.HasOne("Rhinodoor_backend.Models.Door", "Door")
                         .WithMany("DoorColors")
                         .HasForeignKey("DoorId")
-                        .OnDelete(DeleteBehavior.Cascade)
+                        .OnDelete(DeleteBehavior.NoAction)
                         .IsRequired();
 
                     b.Navigation("Door");
@@ -177,7 +177,7 @@ namespace Rhinodoor_backend.Migrations
                     b.HasOne("Rhinodoor_backend.Models.Door", "Door")
                         .WithMany("DoorOptions")
                         .HasForeignKey("DoorId")
-                        .OnDelete(DeleteBehavior.Cascade)
+                        .OnDelete(DeleteBehavior.NoAction)
                         .IsRequired();
 
                     b.Navigation("Door");
@@ -194,17 +194,19 @@ namespace Rhinodoor_backend.Migrations
                     b.HasOne("Rhinodoor_backend.Models.Door", "Door")
                         .WithMany("Orders")
                         .HasForeignKey("DoorId")
-                        .OnDelete(DeleteBehavior.Cascade)
+                        .OnDelete(DeleteBehavior.NoAction)
                         .IsRequired();
 
                     b.HasOne("Rhinodoor_backend.Models.DoorOption", "DoorOption")
                         .WithMany("Orders")
-                        .HasForeignKey("DoorOptionId");
+                        .HasForeignKey("DoorOptionId")
+                        .OnDelete(DeleteBehavior.NoAction)
+                        .IsRequired();
 
                     b.HasOne("Rhinodoor_backend.Models.User", "PlacedByUser")
                         .WithOne("Order")
                         .HasForeignKey("Rhinodoor_backend.Models.Order", "PlacedBy")
-                        .OnDelete(DeleteBehavior.Cascade)
+                        .OnDelete(DeleteBehavior.NoAction)
                         .IsRequired();
 
                     b.Navigation("Door");

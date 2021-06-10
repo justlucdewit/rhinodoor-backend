@@ -15,15 +15,15 @@ namespace Rhinodoor_backend.Models
 
         public int DoorId { get; set; }
 
-        //public int DoorOptionId { get; set; }
-
+        public int DoorOptionId { get; set; }
+        
         public int DoorColorId { get; set; }
 
         public virtual User PlacedByUser { get; set; }
 
         public virtual Door Door { get; set; }
 
-        public virtual DoorOption DoorOption { get; set; }
+        public DoorOption DoorOption { get; set; }
 
         public virtual DoorColor DoorColor { get; set; }
     }

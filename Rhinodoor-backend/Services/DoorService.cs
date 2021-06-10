@@ -82,7 +82,7 @@ namespace Rhinodoor_backend.Services
                 PlacedOn = DateTime.UtcNow,
                 PlacedByUser = dbUser,
                 DoorId = order.DoorId,
-                //DoorOptionId = order.DoorOptionId,
+                DoorOptionId = order.DoorOptionId,
                 DoorColorId = order.DoorColorId
             });
         }
