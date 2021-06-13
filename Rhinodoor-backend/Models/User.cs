@@ -27,6 +27,8 @@ namespace Rhinodoor_backend.Models
 
         public string PasswordHash { get; set; }
 
+        public string PasswordSalt { get; set;  }
+
         public Order Order { get; set; }
     }
 }

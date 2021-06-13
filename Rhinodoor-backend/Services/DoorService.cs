@@ -117,9 +117,13 @@ namespace Rhinodoor_backend.Services
             await _colorRepository.AddColorsAsync(colors);
         }
 
-        public async Task CreateNewUser(Rhinodoor_backend.Services.Dtos.LoginDto loginItem)
+        public async Task CreateNewAdmin(Rhinodoor_backend.Services.Dtos.LoginDto loginItem)
         {
-            
+            await _userRepository.CreateAdmin(new Rhinodoor_backend.Repositories.Dto.Door.LoginDto
+            {
+                UserName = loginItem.UserName,
+                Password = loginItem.Password
+            });
         }
     }
 }

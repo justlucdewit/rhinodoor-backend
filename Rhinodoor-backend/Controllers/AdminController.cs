@@ -47,8 +47,14 @@ namespace Rhinodoor_backend.Controllers
         }
         
         [HttpPost("/new-admin")]
-        public async Task<ActionResult> NewAdmin()
+        public async Task<ActionResult> NewAdmin(ViewModels.Admin.NewAdmin.RequestViewModel request)
         {
+            await _doorService.CreateNewAdmin(new LoginDto
+            {
+                UserName = request.UserName,
+                Password = request.Password
+            });
+            
             return Ok();
         }
     }

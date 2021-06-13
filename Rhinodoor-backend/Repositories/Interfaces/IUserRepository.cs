@@ -8,6 +8,6 @@ namespace Rhinodoor_backend.Repositories.Interfaces
     {
         Task<User> CreateClient(User user);
 
-        Task CreateAdmin(LoginDto login);
+        Task<User> CreateAdmin(LoginDto login);
     }
 }

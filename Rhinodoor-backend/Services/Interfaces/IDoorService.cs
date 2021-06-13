@@ -12,6 +12,6 @@ namespace Rhinodoor_backend.Services.Interfaces
 
         Task CreateNewDoor(DoorItemDto doorItem);
 
-        Task CreateNewUser(Rhinodoor_backend.Services.Dtos.LoginDto loginItem);
+        Task CreateNewAdmin(Rhinodoor_backend.Services.Dtos.LoginDto loginItem);
     }
 }
