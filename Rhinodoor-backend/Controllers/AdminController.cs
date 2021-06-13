@@ -46,6 +46,11 @@ namespace Rhinodoor_backend.Controllers
             return Ok();
         }
         
+        /// <summary>
+        /// Create a new admin account with login
+        /// </summary>
+        /// <param name="request"></param>
+        /// <returns></returns>
         [HttpPost("/new-admin")]
         public async Task<ActionResult> NewAdmin(ViewModels.Admin.NewAdmin.RequestViewModel request)
         {
@@ -54,6 +59,19 @@ namespace Rhinodoor_backend.Controllers
                 UserName = request.UserName,
                 Password = request.Password
             });
+            
+            return Ok();
+        }
+        
+        /// <summary>
+        /// Delete a door
+        /// </summary>
+        /// <param name="doorId"></param>
+        /// <returns></returns>
+        [HttpDelete("/door{doorId:int}/{deleteOrders:bool}")]
+        public async Task<ActionResult> DeleteDoor(int doorId, bool deleteOrders)
+        {
+            await _doorService.RemoveDoorAsync(doorId, deleteOrders);
             
             return Ok();
         }

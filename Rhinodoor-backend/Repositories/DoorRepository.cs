@@ -1,5 +1,6 @@
+using System;
 using System.Collections.Generic;
-using System.Data.Entity;
+using Microsoft.EntityFrameworkCore;
 using System.Linq;
 using System.Threading.Tasks;
 using Rhinodoor_backend.AppExtensions;
@@ -38,7 +39,51 @@ namespace Rhinodoor_backend.Repositories
             await _dbContext.Doors
                 .Where(door => door.Id == doorId)
                 .FirstOrDefaultAsync();
+
         
+        /// <summary>
+        /// Remove a door by id
+        /// </summary>
+        /// <param name="doorId"></param>
+        /// <returns></returns>
+        public async Task RemoveDoorAsync(int doorId, bool deleteOrders)
+        {
+            var ordered = _dbContext.Orders.Any(x => x.DoorId == doorId);
+
+            if (ordered && !deleteOrders)
+                throw new Exception("This door orders and should not be deleted");
+            else if (ordered)
+            {
+                var orders = _dbContext.Orders.Where(x => x.DoorId == doorId);
+                
+                _dbContext.Orders.RemoveRange(orders);
+            }
+            
+            // Remove the door options
+            var doorOptions = _dbContext.DoorOptions
+                .Where(x => x.DoorId == doorId);
+            
+            _dbContext.DoorOptions
+                .RemoveRange(doorOptions);
+            
+            // Remove the door colors
+            var doorColors = _dbContext.DoorColors
+                .Where(x => x.DoorId == doorId);
+            
+            _dbContext.DoorColors
+                .RemoveRange(doorColors);
+            
+            // Remove the door
+            var dbDoor = await _dbContext.Doors
+                .FirstOrDefaultAsync(x => x.Id == doorId);
+            
+            _dbContext.Doors
+                .Remove(dbDoor);
+            
+            // Save
+            await _dbContext.SaveChangesAsync();
+        }
+
         /// <summary>
         /// Create a new door
         /// </summary>

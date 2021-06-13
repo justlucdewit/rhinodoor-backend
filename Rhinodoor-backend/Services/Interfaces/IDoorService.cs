@@ -13,5 +13,7 @@ namespace Rhinodoor_backend.Services.Interfaces
         Task CreateNewDoor(DoorItemDto doorItem);
 
         Task CreateNewAdmin(Rhinodoor_backend.Services.Dtos.LoginDto loginItem);
+
+        Task RemoveDoorAsync(int doorId, bool deleteOrders);
     }
 }

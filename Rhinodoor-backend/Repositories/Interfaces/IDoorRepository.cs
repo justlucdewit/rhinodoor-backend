@@ -11,6 +11,8 @@ namespace Rhinodoor_backend.Repositories.Interfaces
         IQueryable<Door> GetAll();
 
         Task<Door> Get(int doorId);
+
+        Task RemoveDoorAsync(int doorId, bool deleteOrders);
         
         Task<Door> CreateNewDoor(DoorDto door);
 

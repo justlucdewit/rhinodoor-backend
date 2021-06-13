@@ -116,7 +116,12 @@ namespace Rhinodoor_backend.Services
 
             await _colorRepository.AddColorsAsync(colors);
         }
-
+        
+        /// <summary>
+        /// Create a new admin account with login
+        /// </summary>
+        /// <param name="loginItem"></param>
+        /// <returns></returns>
         public async Task CreateNewAdmin(Rhinodoor_backend.Services.Dtos.LoginDto loginItem)
         {
             await _userRepository.CreateAdmin(new Rhinodoor_backend.Repositories.Dto.Door.LoginDto
@@ -124,6 +129,16 @@ namespace Rhinodoor_backend.Services
                 UserName = loginItem.UserName,
                 Password = loginItem.Password
             });
+        }
+        
+        /// <summary>
+        /// Remove door async
+        /// </summary>
+        /// <param name="doorId"></param>
+        /// <returns></returns>
+        public async Task RemoveDoorAsync(int doorId, bool deleteOrders)
+        {
+            await _doorRepository.RemoveDoorAsync(doorId, deleteOrders);
         }
     }
 }
