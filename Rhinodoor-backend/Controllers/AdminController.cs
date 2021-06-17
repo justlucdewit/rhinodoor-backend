@@ -7,7 +7,6 @@ using Rhinodoor_backend.Services.Interfaces;
 namespace Rhinodoor_backend.Controllers
 {
     [ApiController]
-    [Route("[controller]/{username}/{password}/")]
     public class AdminController : ControllerBase
     {
         private readonly IDoorService _doorService;
@@ -25,7 +24,7 @@ namespace Rhinodoor_backend.Controllers
         /// </summary>
         /// <param name="request"></param>
         /// <returns></returns>
-        [HttpPost("/new-door")]
+        [HttpPost("admin/new-door")]
         [ProducesResponseType(200)]
         public async Task<ActionResult> NewDoor([FromRoute] string username, [FromRoute] string password, [FromBody] ViewModels.Admin.NewDoor.RequestViewModel request)
         {
@@ -51,8 +50,8 @@ namespace Rhinodoor_backend.Controllers
         /// </summary>
         /// <param name="request"></param>
         /// <returns></returns>
-        [HttpPost("/new-admin")]
-        public async Task<ActionResult> NewAdmin(ViewModels.Admin.NewAdmin.RequestViewModel request)
+        [HttpPost("admin/new-admin")]
+        public async Task<ActionResult> NewAdmin([FromBody] ViewModels.Admin.NewAdmin.RequestViewModel request)
         {
             await _doorService.CreateNewAdmin(new LoginDto
             {
@@ -68,12 +67,50 @@ namespace Rhinodoor_backend.Controllers
         /// </summary>
         /// <param name="doorId"></param>
         /// <returns></returns>
-        [HttpDelete("/door{doorId:int}/{deleteOrders:bool}")]
-        public async Task<ActionResult> DeleteDoor(int doorId, bool deleteOrders)
+        [HttpDelete("admin/door{doorId:int}/{deleteOrders:bool}")]
+        public async Task<ActionResult> DeleteDoor([FromRoute] int doorId, [FromRoute] bool deleteOrders)
         {
             await _doorService.RemoveDoorAsync(doorId, deleteOrders);
             
             return Ok();
+        }
+        
+        /// <summary>
+        /// Validate a login code
+        /// </summary>
+        /// <returns></returns>
+        [HttpPost("admin/validate-login")]
+        public async Task<ActionResult> ValidateLogin([FromBody] ViewModels.Admin.ValidateLogin.RequestViewModel request)
+        {
+            var result = await _doorService.ValidateLogin(new LoginDto
+            {
+                UserName = request.UserName,
+                Password = request.Password
+            });
+
+            return result
+                ? Ok()
+                : Unauthorized();
+        }
+        
+        /// <summary>
+        /// Gets an overview of all orders
+        /// </summary>
+        /// <returns></returns>
+        [HttpGet("/admin/orders")]
+        public async Task<ActionResult> GetOrders()
+        {
+            var orders = await _doorService.GetOrderOverview();
+
+            var responseViewModel = orders.Select(order => new ViewModels.Admin.GetOrders.ResponseViewModel
+            {
+                Status = order.Status,
+                Id = order.Id,
+                PlacedBy = order.PlacedBy,
+                PlacedOn = order.PlacedOn
+            }).ToList();
+            
+            return Ok(responseViewModel);
         }
     }
 }

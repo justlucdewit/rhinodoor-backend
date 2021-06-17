@@ -1,7 +1,9 @@
 using System;
+using System.Linq;
 using System.Security.Cryptography;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Cryptography.KeyDerivation;
+using Microsoft.EntityFrameworkCore;
 using Rhinodoor_backend.AppExtensions;
 using Rhinodoor_backend.Models;
 using Rhinodoor_backend.Repositories.Dto.Door;
@@ -68,6 +70,35 @@ namespace Rhinodoor_backend.Repositories.Interfaces
             
             // Return the newly created db entity
             return dbUser.Entity;
+        }
+        
+        /// <summary>
+        /// Validate login
+        /// </summary>
+        /// <param name="login"></param>
+        /// <returns></returns>
+        public async Task<bool> ValidateLogin(LoginDto loginItem)
+        {
+            // Retrieve the login if exists
+            var userName = loginItem.UserName;
+            var login = await _dbContext.Users.FirstOrDefaultAsync(x => x.UserName == userName);
+
+            if (login == null)
+                throw new Exception("user not found");
+            
+            // Get the salt
+            var salt = Convert.FromBase64String(login.PasswordSalt);
+            
+            // Hash the given password
+            var passwordHash = Convert.ToBase64String(KeyDerivation.Pbkdf2(
+                password: loginItem.Password,
+                salt: salt,
+                prf: KeyDerivationPrf.HMACSHA1,
+                iterationCount: 10000,
+                numBytesRequested: 256 / 8));
+            
+            // See if they match
+            return string.Compare(passwordHash, login.PasswordHash) == 0;
         }
     }
 }

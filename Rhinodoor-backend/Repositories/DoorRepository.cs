@@ -48,11 +48,13 @@ namespace Rhinodoor_backend.Repositories
         /// <returns></returns>
         public async Task RemoveDoorAsync(int doorId, bool deleteOrders)
         {
+            // Remove orders (if necessary and if signaled too)
             var ordered = _dbContext.Orders.Any(x => x.DoorId == doorId);
 
             if (ordered && !deleteOrders)
                 throw new Exception("This door orders and should not be deleted");
-            else if (ordered)
+            
+            if (ordered)
             {
                 var orders = _dbContext.Orders.Where(x => x.DoorId == doorId);
                 

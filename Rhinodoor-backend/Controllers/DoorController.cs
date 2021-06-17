@@ -9,7 +9,6 @@ using Rhinodoor_backend.Services.Interfaces;
 namespace Rhinodoor_backend.Controllers
 {
     [ApiController]
-    [Route("[controller]")]
     public class DoorController : ControllerBase
     {
         private readonly IDoorService _doorService;
@@ -27,7 +26,7 @@ namespace Rhinodoor_backend.Controllers
         /// Retrieves basic info of all the doors and returns that in an HTTP ok
         /// </summary>
         /// <returns>A list of all the door data</returns>
-        [HttpGet("all")]
+        [HttpGet("door/all")]
         [ProducesResponseType(200, Type=typeof(ViewModels.Doors.GetAll.ResponseViewModel))]
         public async Task<ActionResult> GetAll()
         {
@@ -47,7 +46,7 @@ namespace Rhinodoor_backend.Controllers
         /// </summary>
         /// <param name="request"></param>
         /// <returns></returns>
-        [HttpPost("order")]
+        [HttpPost("door/order")]
         [Consumes("application/json")]
         [ProducesResponseType(200)]
         public async Task<ActionResult> OrderDoor([FromBody] ViewModels.Doors.OrderDoor.RequestViewModel request)

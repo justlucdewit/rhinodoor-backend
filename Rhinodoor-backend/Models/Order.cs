@@ -19,6 +19,8 @@ namespace Rhinodoor_backend.Models
         
         public int DoorColorId { get; set; }
 
+        public string Status { get; set; }
+
         public virtual User PlacedByUser { get; set; }
 
         public virtual Door Door { get; set; }

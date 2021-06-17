@@ -9,6 +9,7 @@ using Rhinodoor_backend.Repositories.Interfaces;
 using Rhinodoor_backend.Services.Dtos;
 using Rhinodoor_backend.Services.Interfaces;
 using DoorDto = Rhinodoor_backend.Services.Dtos.DoorDto;
+using LoginDto = Rhinodoor_backend.Services.Dtos.LoginDto;
 
 namespace Rhinodoor_backend.Services
 {
@@ -139,6 +140,41 @@ namespace Rhinodoor_backend.Services
         public async Task RemoveDoorAsync(int doorId, bool deleteOrders)
         {
             await _doorRepository.RemoveDoorAsync(doorId, deleteOrders);
+        }
+        
+        /// <summary>
+        /// Validate login
+        /// </summary>
+        /// <returns></returns>
+        public async Task<bool> ValidateLogin(LoginDto loginItem)
+        {
+            return await _userRepository.ValidateLogin(new Rhinodoor_backend.Repositories.Dto.Door.LoginDto
+            {
+                UserName = loginItem.UserName,
+                Password = loginItem.Password
+            });
+        }
+        
+        /// <summary>
+        /// Get overview of all the orders
+        /// </summary>
+        /// <returns></returns>
+        public async Task<List<OrderOverviewDto>> GetOrderOverview()
+        {
+            // Retrieve orders
+            var orders = _orderRepository
+                .GetAll()
+                .Include(x => x.PlacedByUser)
+                .ToList();
+            
+            // Map the orders
+            return orders.Select(order => new OrderOverviewDto
+            {
+                Id = order.Id,
+                Status = order.Status,
+                PlacedOn = order.PlacedOn.ToString("dd/MM/yyyy"),
+                PlacedBy = order.PlacedByUser.Name
+            }).ToList();
         }
     }
 }

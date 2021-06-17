@@ -1,4 +1,5 @@
 using System.Threading.Tasks;
+using Microsoft.EntityFrameworkCore;
 using Rhinodoor_backend.AppExtensions;
 using Rhinodoor_backend.Models;
 using Rhinodoor_backend.Repositories.Interfaces;
@@ -25,11 +26,18 @@ namespace Rhinodoor_backend.Repositories
         /// <returns></returns>
         public async Task<Order> PlaceOrder(Order order)
         {
+            order.Status = "Placed";
+            
             var dbOrder = await _dbContext.Orders.AddAsync(order);
             
             await _dbContext.SaveChangesAsync();
 
             return dbOrder.Entity;
+        }
+
+        public DbSet<Order> GetAll()
+        {
+            return _dbContext.Orders;
         }
     }
 }

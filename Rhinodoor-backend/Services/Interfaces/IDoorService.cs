@@ -15,5 +15,9 @@ namespace Rhinodoor_backend.Services.Interfaces
         Task CreateNewAdmin(Rhinodoor_backend.Services.Dtos.LoginDto loginItem);
 
         Task RemoveDoorAsync(int doorId, bool deleteOrders);
+
+        Task<bool> ValidateLogin(LoginDto login);
+
+        Task<List<OrderOverviewDto>> GetOrderOverview();
     }
 }

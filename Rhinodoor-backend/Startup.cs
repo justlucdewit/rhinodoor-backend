@@ -46,6 +46,11 @@ namespace Rhinodoor_backend
                 app.UseSwagger();
                 app.UseSwaggerUI(c => c.SwaggerEndpoint("/swagger/v1/swagger.json", "Rhinodoor_backend v1"));
             }
+            
+            app.UseCors (x => x
+                .AllowAnyOrigin ()
+                .AllowAnyMethod ()
+                .AllowAnyHeader ());
 
             app.UseHttpsRedirection();
 
@@ -54,6 +59,8 @@ namespace Rhinodoor_backend
             app.UseAuthorization();
 
             app.UseEndpoints(endpoints => { endpoints.MapControllers(); });
+            
+            
         }
     }
 }
