@@ -59,8 +59,6 @@ namespace Rhinodoor_backend
             app.UseAuthorization();
 
             app.UseEndpoints(endpoints => { endpoints.MapControllers(); });
-            
-            
         }
     }
 }

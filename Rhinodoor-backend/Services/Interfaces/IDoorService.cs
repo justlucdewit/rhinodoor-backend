@@ -19,5 +19,7 @@ namespace Rhinodoor_backend.Services.Interfaces
         Task<bool> ValidateLogin(LoginDto login);
 
         Task<List<OrderOverviewDto>> GetOrderOverview();
+
+        Task<DoorDetailsDto> GetDoorDetails(int doorId);
     }
 }

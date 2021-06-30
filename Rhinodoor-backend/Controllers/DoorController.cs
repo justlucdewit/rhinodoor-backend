@@ -66,5 +66,13 @@ namespace Rhinodoor_backend.Controllers
             
             return Ok();
         }
+        
+        [HttpPost("door/{doorId:int}")]
+        [Consumes("application/json")]
+        [ProducesResponseType(200)]
+        public async Task<ActionResult> GetDoor(int doorId)
+        {
+            return Ok();
+        }
     }
 }

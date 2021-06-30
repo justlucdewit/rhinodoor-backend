@@ -176,5 +176,10 @@ namespace Rhinodoor_backend.Services
                 PlacedBy = order.PlacedByUser.Name
             }).ToList();
         }
+
+        public async Task<DoorDetailsDto> GetDoorDetails(int doorId)
+        {
+            throw new NotImplementedException();
+        }
     }
 }
