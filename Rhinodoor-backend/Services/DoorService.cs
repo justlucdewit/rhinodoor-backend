@@ -53,7 +53,8 @@ namespace Rhinodoor_backend.Services
             return doors.Select(door => new DoorDto
             {
                 DoorName = door.DoorName,
-                DoorImage = door.DoorImage
+                DoorImage = door.DoorImage,
+                DoorId = door.Id
             }).ToList();
         }
         

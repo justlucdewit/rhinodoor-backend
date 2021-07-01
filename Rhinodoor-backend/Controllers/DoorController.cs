@@ -35,7 +35,8 @@ namespace Rhinodoor_backend.Controllers
             var response = doors.Select(door => new ViewModels.Doors.GetAll.ResponseViewModel
             {
                 DoorName = door.DoorName,
-                DoorImage = door.DoorImage
+                DoorImage = door.DoorImage,
+                DoorId = door.DoorId
             }).ToList();
             
             return new JsonResult(response);

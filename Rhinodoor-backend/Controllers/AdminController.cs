@@ -67,7 +67,7 @@ namespace Rhinodoor_backend.Controllers
         /// </summary>
         /// <param name="doorId"></param>
         /// <returns></returns>
-        [HttpDelete("admin/door{doorId:int}/{deleteOrders:bool}")]
+        [HttpDelete("admin/door/{doorId:int}/{deleteOrders:bool}")]
         public async Task<ActionResult> DeleteDoor([FromRoute] int doorId, [FromRoute] bool deleteOrders)
         {
             await _doorService.RemoveDoorAsync(doorId, deleteOrders);
