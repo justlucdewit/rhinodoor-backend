@@ -14,6 +14,8 @@ namespace Rhinodoor_backend.Models
 
         public string DoorImage { get; set; }
 
+        public string DoorDescription { get; set; }
+
         public List<DoorOption> DoorOptions { get; set; }
         
         public List<Order> Orders { get; set; }

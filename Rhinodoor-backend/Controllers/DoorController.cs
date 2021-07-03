@@ -68,12 +68,18 @@ namespace Rhinodoor_backend.Controllers
             return Ok();
         }
         
-        [HttpPost("door/{doorId:int}")]
+        [HttpGet("door/{doorId:int}")]
         [Consumes("application/json")]
-        [ProducesResponseType(200)]
-        public async Task<ActionResult> GetDoor(int doorId)
+        [ProducesResponseType(200, Type = typeof(ViewModels.Doors.GetDoor.RequestViewModel))]
+        public async Task<ActionResult> GetDoor([FromRoute] int doorId)
         {
-            return Ok();
+            var doorDetails = await _doorService.GetDoorDetails(doorId);
+            
+            return Ok(new ViewModels.Doors.GetDoor.RequestViewModel
+            {
+                Name = doorDetails.Name,
+                Description = doorDetails.Description
+            });
         }
     }
 }

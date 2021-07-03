@@ -33,6 +33,7 @@ namespace Rhinodoor_backend.Controllers
                 ColorsHEX = request.ColorsHex,
                 ColorsRAL = request.ColorsRAL,
                 DoorImage = request.DoorImage,
+                DoorDescription = request.Description,
                 DoorName = request.DoorName,
                 DoorSizes = request.DoorSizes.Select(size => new DoorSizeDto
                 {

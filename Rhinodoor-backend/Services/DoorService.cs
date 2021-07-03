@@ -99,7 +99,8 @@ namespace Rhinodoor_backend.Services
             var dbDoor = await _doorRepository.CreateNewDoor(new Repositories.Dto.Door.DoorDto
             {
                 DoorImage = doorItem.DoorImage,
-                DoorName = doorItem.DoorName
+                DoorName = doorItem.DoorName,
+                DoorDescription = doorItem.DoorDescription
             });
 
             await _doorRepository.CreateDoorOptions(dbDoor.Id, doorItem.DoorSizes.Select(doorSize => new DoorOptionDto
@@ -177,10 +178,22 @@ namespace Rhinodoor_backend.Services
                 PlacedBy = order.PlacedByUser.Name
             }).ToList();
         }
-
+        
+        /// <summary>
+        /// Get door details
+        /// </summary>
+        /// <param name="doorId"></param>
+        /// <returns></returns>
+        /// <exception cref="NotImplementedException"></exception>
         public async Task<DoorDetailsDto> GetDoorDetails(int doorId)
         {
-            throw new NotImplementedException();
+            var door = await _doorRepository.Get(doorId);
+
+            return new DoorDetailsDto
+            {
+                Name = door.DoorName,
+                Description = door.DoorDescription,
+            };
         }
     }
 }

@@ -1,5 +1,8 @@
 # Rhinodoor server app
 
+# Initialize the database
+- 
+
 ## How to start database
 - sudo docker ps -a
 - sudo docker start \<container_id>

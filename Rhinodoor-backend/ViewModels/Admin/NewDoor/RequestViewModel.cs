@@ -8,6 +8,8 @@ namespace Rhinodoor_backend.ViewModels.Admin.NewDoor
 
         public string DoorImage { get; set; }
 
+        public string Description { get; set; }
+
         public List<int> ColorsRAL { get; set; }
 
         public List<int> ColorsHex { get; set; }

@@ -1,6 +1,6 @@
-namespace Rhinodoor_backend.Services.Dtos
+﻿namespace Rhinodoor_backend.ViewModels.Doors.GetDoor
 {
-    public class DoorDetailsDto
+    public class RequestViewModel
     {
         public string Name { get; set; }
 

@@ -7,5 +7,7 @@ namespace Rhinodoor_backend.Repositories.Dto.Door
         public string DoorName { get; set; }
 
         public string DoorImage { get; set; }
+
+        public string DoorDescription { get; set; }
     }
 }

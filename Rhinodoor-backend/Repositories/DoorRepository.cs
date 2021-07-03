@@ -72,6 +72,7 @@ namespace Rhinodoor_backend.Repositories
             var doorColors = _dbContext.DoorColors
                 .Where(x => x.DoorId == doorId);
             
+
             _dbContext.DoorColors
                 .RemoveRange(doorColors);
             
@@ -98,6 +99,7 @@ namespace Rhinodoor_backend.Repositories
             {
                 DoorImage = door.DoorImage,
                 DoorName = door.DoorName,
+                DoorDescription = door.DoorDescription
             });
             
             await _dbContext.SaveChangesAsync();
